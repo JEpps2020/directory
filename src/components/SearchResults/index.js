@@ -8,6 +8,9 @@ function SearchResults(props) {
           <img alt={employee.name} src={employee.image} />
         </div>
         <div className="col">{employee.name}</div>
+        <div className="col">{employee.phone}</div>
+        <div className="col">{employee.email}</div>
+        <div className="col">{employee.dob}</div>
         </div>
       )));
 }
