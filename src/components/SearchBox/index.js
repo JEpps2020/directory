@@ -7,13 +7,14 @@ function SearchBox(props) {
     <form className="search">
       <div className="form-group">
         <input
-          value={props.search}
+          value={props.value}
           // onChange={props.handleInputChange}
-          name="employee"
+          name={props.name}
           type="text"
           className="form-control"
           placeholder="Search"
           id="employee"
+          onChange={props.handleInputChange()}
         />
 
       </div>
