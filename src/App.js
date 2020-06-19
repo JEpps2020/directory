@@ -11,35 +11,62 @@ class App extends React.Component {
 
   state = {
     employees: [],
-    userInput: ""
+    userInput: "",
+    results: []
+    };
+  
+  searchName = value => {
+
+      this.findName(this.state.employees,0,value);
+
     };
 
-    searchName = () => {
-      // // Filter this.state.friends for friends with an id not equal to the id being removed
-      // const friends = this.state.friends.filter(friend => friend.id !== id);
-      // // Set this.state.friends equal to the new friends array
-      // this.setState({ friends });
+    componentDidMount() {
+      
+      this.setState({ employees: employees });
+      this.setState({ results: employees});
+
+    }
+
+    findName(names, index, letter) {
+  
+      var filteredNames = [];
+      names.forEach(name => {
+        if (name.name.startsWith(letter,0))
+        {
+          filteredNames.push(name);
+          console.log(name);
+        }  
+      });
+  
+      this.setState({ results: filteredNames });
+    }
+  
+    sortByName= () =>{
+      console.log(this.state.employees.sort((a, b) => (a.name > b.name) ? 1 : -1))
+      //this.setState({ employees: });
+
     };
   
     handleInputChange = event => {
       // Getting the value and name of the input which triggered the change
-      const { name, value } = event.target;
-  
+      const name = event.target.name;
+      const value = event.target.value;
       // Updating the input's state
       this.setState({
         [name]: value
       });
+      //console.log(name);
+      //console.log(value);
+      this.searchName(value);
     };
 
-    componentDidMount() {
-        this.setState({ employees: employees });
-    }
-  
     render() {
       return (
         <Wrapper>
           <Header>Employee Header</Header>
           <Container>
+            <button onClick={this.sortByName}>Name</button>
           <form className="search">
       <div className="form-group">
         <input
@@ -57,7 +84,7 @@ class App extends React.Component {
     </form>
       
         
-        <SearchResults employees={this.state.employees} />     
+        <SearchResults employees={this.state.results} />     
         </Container>
         </Wrapper>
       );
